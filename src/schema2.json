@@ -1,0 +1,76 @@
+[
+  {
+    "type": "array",
+    "items": {
+      "type": "object",
+      "properties": {
+        "flight": {
+          "type": "string",
+          "minLength": 6,
+          "description": "Flight number"
+        },
+        "flightDate": {
+          "type": "string",
+          "format": "date"
+        },
+        "category": {
+          "type": "array",
+          "uniqueItems": true,
+          "elementLabelProp": "name",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "oneOf": [
+              {
+                "const": { "name": "beverages", "id": "beverages" },
+                "title": "Beverages"
+              },
+              {
+                "const": { "name": "snacks", "id": "snacks" },
+                "title": "Meals, snacks & tableware"
+              },
+              {
+                "const": { "name": "cleaning", "id": "cleaning" },
+                "title": "cleaning"
+              }
+            ]
+          }
+        },
+        "subCategory": {
+          "type": "array",
+          "uniqueItems": true,
+          "elementLabelProp": "name",
+          "items": {
+            "type": "object",
+            "additionalProperties": true,
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "oneOf": [
+              {
+                "const": { "name": "beverages", "id": "beverages" },
+                "title": "Beverages"
+              },
+              {
+                "const": { "name": "snacks", "id": "snacks" },
+                "title": "Meals, snacks & tableware"
+              },
+              {
+                "const": { "name": "cleaning", "id": "cleaning" },
+                "title": "cleaning"
+              }
+            ]
+          }
+        }
+      },
+      "required": ["flight", "flightDate", "category", "subCategory"]
+    }
+  }
+]

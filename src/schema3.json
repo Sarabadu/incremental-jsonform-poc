@@ -1,0 +1,60 @@
+{
+  "type": "object",
+  "properties": {
+    "category": {
+      "type": "string",
+      "enum": ["Category A", "Category B"]
+    },
+    "subcategory": {
+      "type": "string",
+      "enum": [
+        "Subcategory AA",
+        "Subcategory AB",
+        "Subcategory BA",
+        "Subcategory BB"
+      ],
+      "dependencies": {
+        "category": {
+          "oneOf": [
+            {
+              "properties": {
+                "category": {
+                  "enum": ["Category A"]
+                }
+              },
+              "enum": ["Subcategory AA", "Subcategory AB"]
+            },
+            {
+              "properties": {
+                "category": {
+                  "enum": ["Category B"]
+                }
+              },
+              "enum": ["Subcategory BA", "Subcategory BB"]
+            }
+          ]
+        }
+      }
+    },
+    "types": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["Type 1", "Type 2", "Type 3", "Type 4"],
+        "dependencies": {
+          "subcategory": {
+            "oneOf": [
+              { "const": "Subcategory AA", "enum": ["Type 1", "Type 2"] },
+              { "const": "Subcategory AB", "enum": ["Type 3", "Type 4"] },
+              { "const": "Subcategory BA", "enum": ["Type 1", "Type 3"] },
+              { "const": "Subcategory BB", "enum": ["Type 2", "Type 4"] }
+            ]
+          }
+        }
+      }
+    },
+    "comments": {
+      "type": "string"
+    }
+  }
+}

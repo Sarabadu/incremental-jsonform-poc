@@ -1,0 +1,246 @@
+{
+  "relations": {
+    "categories": [
+      {
+        "category": "Category A",
+        "subcategories": [
+          { "subcategory": "Subcategory AA", "types": ["typeAAA", "typeAAB"] },
+          { "subcategory": "Subcategory AB", "types": ["typeABA", "typeABB"] }
+        ]
+      },
+      {
+        "category": "Category B",
+        "subcategories": [
+          { "subcategory": "Subcategory BA", "types": ["typeBAA", "typeBAB"] },
+          { "subcategory": "Subcategory BB", "types": ["typeBBA", "typeBBB"] }
+        ]
+      }
+    ]
+  },
+  "steps": [
+    {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": ["Category A", "Category B"]
+              }
+            },
+            "additionalProperties": true,
+            "discriminator": { "propertyName": "key" },
+            "oneOf": [
+              {
+                "title": "Category A",
+                "const": {
+                  "key": "cat-a",
+                  "category": "Category A"
+                }
+              },
+              {
+                "title": "Category B",
+                "const": {
+                  "key": "cat-b",
+                  "category": "Category B"
+                }
+              }
+            ]
+          },
+          "uniqueItems": true,
+          "filterBy": null
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": ["Category A", "Category B"]
+              },
+              "subcategories": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": true,
+                  "discriminator": { "propertyName": "key" },
+                  "properties": {
+                    "subcategory": {
+                      "type": "string"
+                    }
+                  },
+                  "oneOf": [
+                    {
+                      "title": "Subcategory AA",
+                      "const": {
+                        "key": "sub-aa",
+                        "category": "Category A",
+                        "subcategory": "Subcategory AA"
+                      }
+                    },
+                    {
+                      "title": "Subcategory AB",
+                      "const": {
+                        "key": "sub-ab",
+                        "category": "Category A",
+                        "subcategory": "Subcategory AB"
+                      }
+                    },
+                    {
+                      "title": "Subcategory BA",
+                      "const": {
+                        "key": "sub-ba",
+                        "category": "Category B",
+                        "subcategory": "Subcategory BA"
+                      }
+                    },
+                    {
+                      "title": "Subcategory BB",
+                      "const": {
+                        "key": "sub-bb",
+                        "category": "Category B",
+                        "subcategory": "Subcategory BB"
+                      }
+                    }
+                  ]
+                },
+                "uniqueItems": true,
+                "filterBy": {
+                  "parent": "category"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "type": "object",
+      "properties": {
+        "categories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "category": {
+                "type": "string",
+                "enum": ["Category A", "Category B"]
+              },
+              "subcategories": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "subcategory": {
+                      "type": "string"
+                    },
+                    "types": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "discriminator": { "propertyName": "key" },
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          }
+                        },
+                        "oneOf": [
+                          {
+                            "title": "typeAAA",
+                            "const": {
+                              "key": "type-aaa",
+                              "subcategory": "Subcategory AA",
+                              "type": "typeAAA"
+                            }
+                          },
+                          {
+                            "title": "typeAAB",
+                            "const": {
+                              "key": "type-aab",
+                              "category": "Category A",
+                              "subcategory": "Subcategory AA",
+                              "type": "typeAAB"
+                            }
+                          },
+                          {
+                            "title": "typeABA",
+                            "const": {
+                              "key": "type-aba",
+                              "category": "Category A",
+                              "subcategory": "Subcategory AB",
+                              "type": "typeABA"
+                            }
+                          },
+                          {
+                            "title": "typeABB",
+                            "const": {
+                              "key": "type-abb",
+                              "category": "Category A",
+                              "subcategory": "Subcategory AB",
+                              "type": "typeABB"
+                            }
+                          },
+                          {
+                            "title": "typeBAA",
+                            "const": {
+                              "key": "type-baa",
+                              "category": "Category B",
+                              "subcategory": "Subcategory BA",
+                              "type": "typeBAA"
+                            }
+                          },
+                          {
+                            "title": "typeBAB",
+                            "const": {
+                              "key": "type-bab",
+                              "category": "Category B",
+                              "subcategory": "Subcategory BA",
+                              "type": "typeBAB"
+                            }
+                          },
+                          {
+                            "title": "typeBBA",
+                            "const": {
+                              "key": "type-bba",
+                              "category": "Category B",
+                              "subcategory": "Subcategory BB",
+                              "type": "typeBBA"
+                            }
+                          },
+                          {
+                            "title": "typeBBB",
+                            "const": {
+                              "key": "type-bbb",
+                              "category": "Category B",
+                              "subcategory": "Subcategory BB",
+                              "type": "typeBBB"
+                            }
+                          }
+                        ]
+                      },
+                      "uniqueItems": true,
+                      "filterBy": {
+                        "parent": "subcategory"
+                      }
+                    }
+                  }
+                },
+                "uniqueItems": true
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

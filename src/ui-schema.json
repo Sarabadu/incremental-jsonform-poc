@@ -1,0 +1,66 @@
+{
+  "type": "VerticalLayout",
+  "elements": [
+    {
+      "type": "VerticalLayout",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/flight",
+          "label": "Flight number"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/flightDate"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/category",
+          "options": {
+            "elementLabelProp": "name",
+            "detail": "DEFAULT"
+          }
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/subCategory",
+          "options": {
+            "elementLabelProp": "name",
+            "detail": "DEFAULT"
+          }
+        }
+      ]
+    },
+    {
+      "type": "Label",
+      "text": "Additional Information"
+    },
+    {
+      "type": "HorizontalLayout",
+      "elements": [
+        {
+          "type": "Control",
+          "scope": "#/properties/personalData/properties/height"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/nationality"
+        },
+        {
+          "type": "Control",
+          "scope": "#/properties/occupation",
+          "suggestion": [
+            "Accountant",
+            "Engineer",
+            "Freelancer",
+            "Journalism",
+            "Physician",
+            "Student",
+            "Teacher",
+            "Other"
+          ]
+        }
+      ]
+    }
+  ]
+}
